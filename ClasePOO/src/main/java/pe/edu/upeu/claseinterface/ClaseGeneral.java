@@ -12,7 +12,7 @@ public class ClaseGeneral {
         animal= new Loro();
         animal.dormir();
         animal.emitirSonido();
-        
+
 
     }
 }
