@@ -12,11 +12,6 @@ public class ClaseGeneral {
         animal= new Loro();
         animal.dormir();
         animal.emitirSonido();
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 08a92fa4bb34d52659a9bce5cc167c25ca4c5dfd
 
     }
 }

@@ -10,6 +10,8 @@
           <Menu fx:id="menu1" mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="menuItem1" mnemonicParsing="false" text="Asistencia" />
+                <MenuItem fx:id="menuItem2" mnemonicParsing="false" text="adm Participante" />
+                <MenuItem fx:id="menuItemC" mnemonicParsing="false" text="salir" />
             </items>
           </Menu>
         </menus>
