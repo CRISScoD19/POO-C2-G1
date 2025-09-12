@@ -64,7 +64,7 @@
                               <Label text="Tippo Participante" GridPane.rowIndex="5" />
                               <ComboBox fx:id="cbxCarrera" prefHeight="26.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <ComboBox fx:id="cbxTipoParticipante" prefHeight="26.0" prefWidth="167.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" prefHeight="18.0" prefWidth="71.0" text="BUSCAR" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                              <Button mnemonicParsing="false" prefHeight="22.0" prefWidth="60.0" text="BUSCAR" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <padding>
                                     <Insets left="1.0" />
                                  </padding>
