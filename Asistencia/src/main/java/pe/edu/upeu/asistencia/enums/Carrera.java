@@ -5,24 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Getter
 @NoArgsConstructor
-
+@Getter
 public enum Carrera {
     SISTEMAS(Facultad.FIA, "Sistemas"),
-    CIVIL(Facultad.FIA,"civil"),
-    AMBIENTAL(Facultad.FIA,"ambiental"),
+    CIVIL(Facultad.FIA, "Civil"),
+    AMBIENTAL(Facultad.FIA,  "Ambiental"),
 
-    ADMINISTRACION(Facultad.FCE,"administración"),
-    CONTABILIDAD(Facultad.FCE,"contabilidad"),
+    ADMINISTRACION(Facultad.FCE,  "Administración"),
 
-    EFERMERIA(Facultad.FCS,"enfermería"),
-    NUTRICION(Facultad.FCS,"nutrición"),
+    NUTRICION(Facultad.FCS,   "Nutrición"),
 
-    EDUCACION(Facultad.FACIHED,"educación"),
+    EDUCACION(Facultad.FACIHED, "Educación"),
 
-    GENERAL(Facultad.GENERAL,"general"),
-    ;
+    GENERAL(Facultad.GENERAL, "General"),;
 
     private Facultad facultad;
     private String descripcion;

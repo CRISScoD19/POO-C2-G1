@@ -4,12 +4,13 @@ import org.springframework.stereotype.Service;
 import pe.edu.upeu.asistencia.modelo.Participante;
 import pe.edu.upeu.asistencia.repositorio.ParticipanteRepository;
 import java.util.List;
+
 @Service
 public class ParticipanteServicioImp extends ParticipanteRepository
-        implements ParticipanteServicio {
+        implements ParticipanteServicioI {
     @Override
     public void save(Participante participante) {
-        participantes.add(participante);
+        super.save(participante);
     }
     @Override
     public Participante update(Participante participante, int index) {
@@ -26,9 +27,6 @@ public class ParticipanteServicioImp extends ParticipanteRepository
 
     @Override
     public List<Participante> findAll(){
-        if(participantes.isEmpty()){
-            return super.findAll();
-        }
-        return participantes;
+        return super.findAll();
     }
 }
