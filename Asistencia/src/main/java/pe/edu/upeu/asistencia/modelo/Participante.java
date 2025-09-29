@@ -12,9 +12,9 @@ import pe.edu.upeu.asistencia.enums.TipoParticipante;
 @Setter
 @Getter
 public class Participante {
+    private StringProperty dni;
     private StringProperty nombre;
     private StringProperty apellidos;
-    private StringProperty DNI;
     private Carrera carrera;
     private TipoParticipante tipoParticipante;
     private BooleanProperty estado;
