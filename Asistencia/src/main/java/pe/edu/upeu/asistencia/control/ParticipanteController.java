@@ -2,6 +2,7 @@ package pe.edu.upeu.asistencia.control;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,12 +56,12 @@ public class ParticipanteController {
     public void registrarParticipante(){
         Participante p = new Participante();
 
-        p.setDni(new SimpleStringProperty(txtDni.getText()));
-        p.setNombre(new SimpleStringProperty(txtNombres.getText()));
-        p.setApellidos(new SimpleStringProperty(txtApellidos.getText()));
+        p.setDni(txtDni.getText());
+        p.setNombre(txtNombres.getText());
+        p.setApellidos(txtApellidos.getText());
         p.setCarrera(cbxCarrera.getSelectionModel().getSelectedItem());
         p.setTipoParticipante(cbxTipoParticipante.getSelectionModel().getSelectedItem());
-        p.setEstado(new SimpleBooleanProperty(true));
+        p.setEstado(true);
         if(indexEdit==-1){
             ps.save(p);
         }else{
@@ -82,9 +83,9 @@ public class ParticipanteController {
         tableRegPart.getColumns().addAll(dniCol, nombreCol, apellidoCol, carreraCol, tipoParticipanteCol, opcCol);
     }
     public void listarPartipantes(){
-        dniCol.setCellValueFactory(cellData -> cellData.getValue().getDni());
-        nombreCol.setCellValueFactory(cellData -> cellData.getValue().getNombre());
-        apellidoCol.setCellValueFactory(cellData->cellData.getValue().getApellidos());
+        dniCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
+        nombreCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        apellidoCol.setCellValueFactory(cellData->new SimpleStringProperty(cellData.getValue().getApellidos()));
         carreraCol.setCellValueFactory(
                 cellData->new SimpleStringProperty(cellData.getValue().getCarrera().toString())
         );
@@ -100,9 +101,9 @@ public class ParticipanteController {
         listarPartipantes();
     }
     public void editarPartipante(Participante p, int index){
-        txtDni.setText(p.getDni().getValue());
-        txtNombres.setText(p.getNombre().getValue());
-        txtApellidos.setText(p.getApellidos().getValue());
+        txtDni.setText(p.getDni());
+        txtNombres.setText(p.getNombre());
+        txtApellidos.setText(p.getApellidos());
         cbxTipoParticipante.getSelectionModel().select(p.getTipoParticipante());
         cbxCarrera.getSelectionModel().select(p.getCarrera());
         indexEdit=index;
@@ -120,7 +121,7 @@ public class ParticipanteController {
                 });
                 btnDelet.setOnAction(event -> {
                     Participante p =getTableView().getItems().get(getIndex());
-                    eliminarPartipantes(p.getDni().getValue());
+                    eliminarPartipantes(p.getDni());
                 });
             }
             @Override
