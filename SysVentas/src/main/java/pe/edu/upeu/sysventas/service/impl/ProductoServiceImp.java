@@ -58,7 +58,7 @@ public class ProductoServiceImp implements ProductoIService {
         return listarProducto;
     }
 
-    
+
     @Override
     public List<ModeloDataAutocomplet> listAutoCompletProducto() {
         List<ModeloDataAutocomplet> listarProducto = new ArrayList<>();
