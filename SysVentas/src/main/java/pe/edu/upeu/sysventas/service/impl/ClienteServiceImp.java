@@ -7,21 +7,21 @@ import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysventas.dto.ModeloDataAutocomplet;
 import pe.edu.upeu.sysventas.model.Cliente;
 import pe.edu.upeu.sysventas.repository.ClienteRepository;
-import pe.edu.upeu.sysventas.repository.ICrudGenericRepository;
+import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
 import pe.edu.upeu.sysventas.service.IClienteService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
-public class ClienteServiceImp extends CrudGenericServiceImp<Cliente,String> implements IClienteService {
+@RequiredArgsConstructor
+public class ClienteServiceImp extends CrudGenericoServiceImp<Cliente,String> implements IClienteService {
     private final ClienteRepository clienteRepository;
 
     Logger logger= LoggerFactory.getLogger(ClienteServiceImp.class);
 
     @Override
-    protected ICrudGenericRepository<Cliente, String> getRepo() {
+    protected ICrudGenericoRepository<Cliente, String> getRepo() {
         return clienteRepository;
     }
 

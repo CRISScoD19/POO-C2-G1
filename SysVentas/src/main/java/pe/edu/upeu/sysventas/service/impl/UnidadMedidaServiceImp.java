@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysventas.dto.ComboBoxOption;
 import pe.edu.upeu.sysventas.model.UnidadMedida;
-import pe.edu.upeu.sysventas.repository.ICrudGenericRepository;
+import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
 import pe.edu.upeu.sysventas.repository.UnidadMedidaRepository;
 import pe.edu.upeu.sysventas.service.IUnidadMedidaService;
 
@@ -13,13 +13,12 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class UnidadMedidaServiceImp extends CrudGenericServiceImp<UnidadMedida, Long> implements IUnidadMedidaService {
+public class UnidadMedidaServiceImp extends CrudGenericoServiceImp<UnidadMedida, Long> implements IUnidadMedidaService {
     private final UnidadMedidaRepository unidadMedidaRepository;
     @Override
-    protected ICrudGenericRepository<UnidadMedida, Long> getRepo() {
+    protected ICrudGenericoRepository<UnidadMedida, Long> getRepo() {
         return unidadMedidaRepository;
     }
-
     @Override
     public List<ComboBoxOption> listarCombobox() {
         List<ComboBoxOption> listar=new ArrayList<>();

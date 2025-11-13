@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysventas.dto.ModeloDataAutocomplet;
 import pe.edu.upeu.sysventas.model.Producto;
-import pe.edu.upeu.sysventas.repository.ProductoRepository;
+import pe.edu.upeu.sysventas.repository.IProductoRepository;
 import pe.edu.upeu.sysventas.service.ProductoIService;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductoServiceImp implements ProductoIService {
     private static final Logger logger = LoggerFactory.getLogger(ProductoServiceImp.class);
     @Autowired
-    ProductoRepository pRepo;
+    IProductoRepository pRepo;
     @Override
     public Producto save(Producto producto) {
         return pRepo.save(producto);
@@ -44,9 +44,7 @@ public class ProductoServiceImp implements ProductoIService {
         try {
             for (Producto producto :
                     pRepo.listAutoCompletProducto(nombre + "%")) {
-                ModeloDataAutocomplet data = new ModeloDataAutocomplet();
-                data.setIdx(producto.getNombre());
-
+                ModeloDataAutocomplet data = new ModeloDataAutocomplet();data.setIdx(producto.getNombre());
                 data.setNameDysplay(String.valueOf(producto.getIdProducto()));
                 data.setOtherData(producto.getPu() + ":" +
                         producto.getStock());
@@ -57,8 +55,6 @@ public class ProductoServiceImp implements ProductoIService {
         }
         return listarProducto;
     }
-
-
     @Override
     public List<ModeloDataAutocomplet> listAutoCompletProducto() {
         List<ModeloDataAutocomplet> listarProducto = new ArrayList<>();

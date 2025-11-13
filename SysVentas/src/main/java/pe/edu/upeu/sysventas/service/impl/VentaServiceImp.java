@@ -8,7 +8,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysventas.model.Venta;
-import pe.edu.upeu.sysventas.repository.ICrudGenericRepository;
+import pe.edu.upeu.sysventas.repository.ICrudGenericoRepository;
 import pe.edu.upeu.sysventas.repository.VentaRepository;
 import pe.edu.upeu.sysventas.service.IVentaService;
 
@@ -16,19 +16,21 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
 @RequiredArgsConstructor
-@Service
-public class VentaServiceImp extends CrudGenericServiceImp<Venta, Long> implements IVentaService {
-    @Autowired
-    private DataSource dataSource;
+ @Service
+public class VentaServiceImp extends CrudGenericoServiceImp<Venta, Long> implements IVentaService {
 
     private final VentaRepository ventaRepository;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
-    protected ICrudGenericRepository<Venta, Long> getRepo() {
+    protected ICrudGenericoRepository<Venta, Long> getRepo() {
         return ventaRepository;
     }
 
@@ -43,10 +45,8 @@ public class VentaServiceImp extends CrudGenericServiceImp<Venta, Long> implemen
         return CAMINO.toFile();
     }
 
-
     @Override
-    public JasperPrint runReport(Long idv) throws JRException, SQLException
-    {
+    public JasperPrint runReport(Long idv) throws JRException, SQLException{
         // Verificar si la venta existe
         if (!ventaRepository.existsById(idv)) {
             throw new IllegalArgumentException("La venta con id " + idv + " no existe");
@@ -60,9 +60,36 @@ public class VentaServiceImp extends CrudGenericServiceImp<Venta, Long> implemen
         param.put("imagenurl", imgen);
         param.put("urljasper", urljasper);
         // Cargar el diseño del informe
-        JasperDesign jdesign = JRXmlLoader.load(getFile("comprobante.jrxml"));
+        JasperDesign jdesign =
+                JRXmlLoader.load(getFile("comprobante.jrxml"));
         JasperReport jreport = JasperCompileManager.compileReport(jdesign);
         // Llenar el informe
-        return JasperFillManager.fillReport(jreport, param, dataSource.getConnection());
+        try (Connection conn = dataSource.getConnection()) {
+            //return JasperFillManager.fillReport(jreport, param, conn);
+            return JasperFillManager.fillReport(jreport, param,
+                    dataSource.getConnection());
+        }
     }
+
+    @Override
+    public JasperPrint runReportVentas(String fInicio, String ffinal) throws
+            JRException, SQLException {
+        HashMap<String, Object> param = new HashMap<>();
+        // Obtener ruta de la imagen
+        String imgen = getFile("logoupeu.png").getAbsolutePath();
+        // Agregar parámetros
+        param.put("fechaI", fInicio);
+        param.put("imagenurl", imgen);
+        param.put("fechaF", ffinal);
+        // Cargar el diseño del informe
+        JasperDesign jdesign =
+                JRXmlLoader.load(getFile("reporte_venta.jrxml"));
+        JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+        try (Connection conn = dataSource.getConnection()) {
+            return JasperFillManager.fillReport(jreport, param, conn);
+        }
+    }
+
+
+
 }

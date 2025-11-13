@@ -1,6 +1,18 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package pe.edu.upeu.sysventas.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -17,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "upeu_producto")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
@@ -25,11 +38,9 @@ public class Producto {
     @Size(min = 2, max = 120, message = "El nombre debe tener entre 2 y 120 caracteres")
     @Column(name = "nombre", nullable = false, length = 120)
     private String nombre;
-
     @Positive(message = "El Precio Unitario debe ser positivo")
     @Column(name = "pu", nullable = false)
     private Double pu;
-
     @PositiveOrZero(message = "El Precio Unitario Anterior debe ser positivo o cero")
     @Column(name = "puold", nullable = false)
     private Double puOld;
@@ -44,21 +55,21 @@ public class Producto {
     private Double stockOld;
     @NotNull(message = "Categoria no puede estar vacío")
     @ManyToOne
-    @JoinColumn(name = "id_categoria", referencedColumnName =
-            "id_categoria",
-            nullable = false, foreignKey = @ForeignKey(name =
-            "FK_CATEGORIA_PRODUCTO") )
+    @JoinColumn(name = "id_categoria", referencedColumnName
+            = "id_categoria",
+            nullable = false, foreignKey = @ForeignKey(name
+            = "FK_CATEGORIA_PRODUCTO"))
     private Categoria categoria;
     @NotNull(message = "Marca no puede estar vacío")
     @ManyToOne
     @JoinColumn(name = "id_marca", referencedColumnName = "id_marca",
-            nullable = false, foreignKey = @ForeignKey(name =
-            "FK_MARCA_PRODUCTO"))
+            nullable = false, foreignKey = @ForeignKey(name
+            = "FK_MARCA_PRODUCTO"))
     private Marca marca;
     @NotNull(message = "Unidad Medida no puede estar vacío")
     @ManyToOne
     @JoinColumn(name = "id_unidad", referencedColumnName = "id_unidad",
-            nullable = false, foreignKey = @ForeignKey(name =
-            "FK_UNIDADMEDIDA_PRODUCTO"))
+            nullable = false, foreignKey = @ForeignKey(name
+            = "FK_UNIDADMEDIDA_PRODUCTO"))
     private UnidadMedida unidadMedida;
 }
